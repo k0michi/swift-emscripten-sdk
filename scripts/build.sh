@@ -54,11 +54,13 @@ source="$work/source"
 if [[ ! -d "$source/swift" ]]; then
     git clone --depth 1 --branch "$tag" https://github.com/swiftlang/swift "$source/swift"
 fi
+# build-script runs swift-sdk-generator with SWIFTCI_USE_LOCAL_DEPS=1, so it
+# and its dependencies resolve their dependencies from sibling checkouts.
 needed=(
     swift llvm-project swift-syntax swift-experimental-string-processing
-    swift-sdk-generator swift-argument-parser swift-async-algorithms
-    swift-atomics swift-collections swift-crypto swift-log swift-nio
-    swift-system
+    swift-sdk-generator swift-argument-parser swift-asn1
+    swift-async-algorithms swift-atomics swift-collections swift-crypto
+    swift-log swift-nio swift-system
 )
 skip_args=()
 while read -r repo; do
